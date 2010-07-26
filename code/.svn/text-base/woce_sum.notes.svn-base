@@ -1,0 +1,67 @@
+From: jadb@whpvax.whoi.edu (JANE DUNWORTH (WHPO))  (may 7 1993)
+To: "david@minerva.ucsd.edu"@AQUA.whoi.edu
+Subject: sample sum file (for future reference)
+ 
+  Revision Date:  July 20 1993
+
+                                       P17 LEG1 (TUNES1)                                                                                       
+ SHIP/CRUISE WOCE               CAST         UTC            POSITION                   UNC HT ABOVE METER  MAX  NO.OF               
+ EXPOCODE    SECT STNNBR CASTNO TYPE DATE   TIME CODE LATITUDE    LONGITUDE     NAV  DEPTH BOTTOM   WHEEL PRESS BOTTLES PARAM    COMMENTS
+---------------------------------------------------------------------------------------------------------------------------------------
+ 31WTTUNES/1 P17C    001   01   ROS  060291  955  BE   36 10.10 N 121 44.10 W   GPS
+ 31WTTUNES/1 P17C    001   01   ROS  060291 1029  BO   36 10.30 N 121 44.20 W   GPS    557    7       534  552    18    1-6,9-12     
+ 31WTTUNES/1 P17C    001   01   ROS  060291 1116  EN   36 10.30 N 121 44.70 W   GPS  
+ 31WTTUNES/1 P17C    002   01   ROS  060291 1245  BE   36  6.00 N 121 49.90 W   GPS  
+ 31WTTUNES/1 P17C    002   01   ROS  060291 1311  BO   36  6.00 N 121 50.00 W   GPS    918    8       890  912    19    1-6,9-11,     
+ 31WTTUNES/1 P17C    002   01   ROS  060291 1403  EN   36  6.10 N 121 50.20 W   GPS                                     23,24
+ 31WTTUNES/1 P17C    003   01   ROS  060291 1550  BE   35 58.70 N 121 59.40 W   GPS  
+ 31WTTUNES/1 P17C    003   01   ROS  060291 1631  BO   35 58.80 N 121 59.60 W   GPS   1425    7      1445 1476    22    1-6     
+ 31WTTUNES/1 P17C    003   01   ROS  060291 1723  EN   35 58.30 N 121 58.70 W   GPS  
+ 31WTTUNES/1 P17C    004   01   ROS  060291 2021  BE   35 47.30 N 122 16.60 W   GPS  
+ 31WTTUNES/1 P17C    004   01   ROS  060291 2116  BO   35 47.40 N 122 16.70 W   GPS   2331    9      2385 2462    29    1-8,10-11
+
+    Notes on the above example.  (David Newton)
+ a.  The header consists of 4 records:
+            1) a title with appropriate info
+            2) a record with some column information.
+            3) a record with lots of column information.
+            4) a record with dashes ('-').
+
+ b.  *Everything* should be in upper case.
+ 
+ c.  My conversion program requires the string "POS" in the 2nd record.
+ 
+ d.  The string "UNC" or "COR" in the 2nd record signifies uncorrected or
+       corrected bottom depth.  My conversion program will presently convert
+       uncorrected depths to corrected using a carter table routine.
+       It's possible some .SUM files will have both corrected and uncorrected
+       columns. WHOI would like to receive data with uncorrected depth.
+       Corrected depth should use CDEPTH instead of DEPTH in 2nd record.
+ 
+ e.  The "COMM" (comment field) should be last.  All other fields can
+     be in any order. (but don't be absurd)
+ 
+ f.  The column for a field starts with the first column of the header word
+     on the 3rd header and extends to the start of the next field. (no space
+     is assumed between). My program has a practical limit of 200 columns.
+
+ g.  All data entries need to be under their heading. Including comments.
+ 
+ h.  fields that have not been recorded (like nav_code or meter_wheel) can
+     be omitted from the header.
+ 
+ i.  Missing values for time, depth, height_above_bottom, meter_wheel,
+     max_press, num_bottles  should be left blank. My program will recognize
+     them as missing.
+ 
+ j.  Very Important things to include:
+       EXPOCODE, STNNBR, CASTNO, DATE, LATITUDE, LONGITUDE 
+      
+     Important things to include:
+       SECT, TYPE, TIME, DEPTH, COMM
+ 
+     Things I don't care about:
+       CODE, NAV, BOTTOM, WHEEL, PRESS, PARAM
+ 
+ -David Newton  dnewton@ucsd.edu Scripps Instn. of Oceanog.  [619] 534-6273
+

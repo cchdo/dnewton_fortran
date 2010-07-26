@@ -1,0 +1,2 @@
+gfortran -c rtnfmt.f sumlim.f ljustn.f sumqwk.f sumun1.f cartertab.f cddcfd.f cddcfh.f cddcfu.f fndsum.f wctlim.f wctun1.f wctun2.f wctcvt.f
+gfortran -o asdf rtnfmt.o sumlim.o ljustn.o sumqwk.o sumun1.o cartertab.o cddcfd.o cddcfh.o cddcfu.o fndsum.o wctlim.o wctun1.o wctun2.o wctcvt.o
