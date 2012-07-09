@@ -1,0 +1,107 @@
+sumchk
+  Files:        sumchk sumlim sumqwk sumun1
+  Libraries:    libsumchk libwocecvt
+
+wctcvt
+  Files:        cartertab cddcfd cddcfh cddcfu fndsum
+                wctcvt wctlim wctun1 wctun2
+  Libraries:    libwctcvt libwocecvt
+  Datafiles:    carter_table_atb carter_table_tb
+  Dependencies: sumqwk sumun1
+
+#### FILE DESCRIPTIONS
+carter_table_atb.hex
+"atb" table for Carter table corrections. Binary format
+    <number-of-entries> <entries ...>
+Number of entries is given for backward (C) compatibility.
+
+carter_table_tb.hex
+"tb" table for Carter table corrections. Binary format
+    <number-of-entries> <entries ...>
+Number of entries is given for backward compatibility.
+
+cartertab.py
+Carter table corrections subroutines.
+    finar(latitude, longitud,)
+    Find area for Carter table depth correction.
+    dcorr(depth, area,)
+    Determine corrected depth from Carter tables.
+
+cddcfd.py
+Data conversion from WOCE to DCF.
+    cddcfd(begin,qualps,nobs,dat,qualt,)
+    Yield WOCE data converted to DCF format.
+
+cddcfh.py
+Header conversion from WOCE to DCF.
+    cddcfh(line,begin,end,yr,mo,day,nobs,instr,)
+    Yield WOCE headers converted to DCF format.
+
+cddcfu.py
+Units and name conversion from WOCE to DCF.
+    cddcfu(begin,names,units,)
+    Yield WOCE names and units converted to DCF format.
+
+fndsum.py
+Find WOCE summary line that is appropriate for the requested
+station and cast.
+    find_sum_line(file_contents,begin,end,stn,cast,)
+    Yields the line and expocode of the most appropriate line
+    for the given stnnbr and castno.
+
+libsumchk.py
+Global constants and variables storage for sumchk.
+
+libwctcvt.py
+Global constants and variables storage for wctcvt.
+
+libwocecvt.py
+Global constants for WOCE conversion utilities.
+
+sumchk.py
+Main script for sumchk.
+    check()
+    Check and report errors for a WOCE summary file.
+    main()
+
+sumlim.py
+Find column limits in a WOCE summary file.
+    get_summary_limits(file_contents,)
+    Yield beginning and ending character columns for data columns
+    in a WOCE summary file.
+
+sumqwk.py
+Quick reading of identifying parameters of a WOCE summary file line.
+    load(line,param_index,begin,end,max,missing_message,too_big_message,)
+    Loads and yields a single parameter for a given line.
+    sumqwk(line,begin,end,first,)
+    Loads and yields the identifying parameters of the given line.
+    
+sumun1.py
+Full read of WOCE summary file parameters on a given line.
+    sumun1_load(line,param_index,begin,end,)
+    Parse individual data parameters from the given summary line.
+    sumun1(line,begin,end,)
+    Yields aggregate parsing of data parameters from the given line.
+
+wctcvt.py
+Main script for wctcvt.
+    convert(sum_filename,)
+    Convert and write DCF-format version of a WOCE summary file.
+    main()
+
+wctlim.py
+Parse header records for names, units, and quality flags in a WOCE
+summary file.
+    get_wct_limits(file_contents,)
+    Yield name, unit, and quality flag information for the given file.
+
+wctun1.py
+Parse first 3 lines of a WOCE summary file.
+    wctun1(lst,)
+    Yield expocode, date, and identifier information for line(s).
+
+wctun2.py
+Full parse of WOCE summary CTD data.
+    wctun2(file_contents,begin,end,nrecords,)
+    Yield parsed data from the given file.
