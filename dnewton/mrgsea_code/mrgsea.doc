@@ -1,0 +1,61 @@
+                        Mrgsea
+        Merges new data into an existing WOCE format .SEA file
+ 
+   Program mrgsea adds or replaces data into an existing WOCE format
+  .SEA or .HYD file. 
+ 
+   Program will query user for filenames and options.
+ 
+   Notes:
+    Existing .sea file is assumed to be correctly formatted.
+    Program merges one parameter per run. 
+    The new input data file is read with a user supplied fortran format
+      specification.  (will not read comma delimited "free" format)
+     
+   Matching options.
+   5 schemes can be used to match samples.
+          1. STNNBR, CASTNO, SAMPNO
+          2. STNNBR, CASTNO, BTLNBR
+          3. STNNBR, SAMPNO
+          4. STNNBR, CASTNO, CTDPRS
+          5. STNNBR, CTDPRS
+    Scheme #1 is the best.
+ 
+ Fortran formatting.
+     You'll be asked early on to supply a valid fortran runtime format
+     for reading the new input data file.  A crude template will be
+     given to the user based on the matching scheme selected and the
+     number of accompanying quality flags.
+ 
+     Given this new data,
+  STNNBR  CASTNO  SAMPNO  CFC-11  CFC-12  QUALT1
+                         PMOL/KG PMOL/KG       *
+                         ******* *******       *
+     999       1       1   1.588   0.994      28
+     999       1       2   1.592   0.984      28
+ 
+    and using matching scheme 1 and having 1 quality flag
+    The following format would read CFC-11 and its quality flag.
+    (a8,i8,a8,f8.0,8x,6x,i1)
+     decoded this means: first 8 chars contain character data.
+                         next 8 chars contain 1 integer.
+                         next 8 chars contain character data.
+                         next 8 chars contain a real.
+                         skip 8 chars
+                         skip 6 chars
+                         next character contains 1 integer.
+ 
+    An equivalent using t format would be: (a8,i8,a8,f8.0,t47,i1)
+    The last integer would be read from exactly column 47.
+ 
+    "t" format will be used when your input new data file doesn't
+       have the various fields in the exact order mrgsea expects. 
+       for example this file:
+ 
+  STNNBR  CASTNO  CFC-11  CFC-12  SAMPNO  QUALT1
+                 PMOL/KG PMOL/KG               *
+                 ******* *******               *
+     999       1   1.588   0.994       1      28
+     999       1   1.592   0.984       2      28
+                        
+       Would be read with: (a8,i8,t33,a8,t17,f8.0,t47,i1)

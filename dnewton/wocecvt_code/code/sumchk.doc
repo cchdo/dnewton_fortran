@@ -1,0 +1,29 @@
+                 Program Sumchk
+          WOCE .SUM file format verifier
+  
+  Program sumchk looks at everything it can in a WOCE .SUM file to see
+ if it's correctly formatted. 
+ 
+   execution:
+                 sumchk
+   program asks for:
+                 input (.SUM) filename
+                 number of errors to allow before aborting.
+ 
+  
+  The program insists on having a standard .SUM file header with the 
+ required keywords in it. 
+ 
+    The first thing the program will tell you is if you're missing any
+ standard keywords. If you already know it's not there then okay, but
+ if you see it's missing an important parameter like STNNBR then you've
+ done something wrong.  It also checks for two different types of 
+ bottom_depth and notes if they're missing. Don't take this to mean that
+ you have to include both corrected AND uncorrected depth.
+ 
+   Does not check to see that you've used proper cast_type or
+ navigation codes. (but does check their size)
+ 
+   See woce_sum.notes for help in forming a correct .SUM file.
+ 
+-David Newton   Scripps Instn. of Oceanog.

@@ -1,0 +1,24 @@
+                           Proogram cvuwoce
+    Converts historical units in WOCE format hydro data to /KG units.
+ 
+ 
+   A small percentage of WOCE format hydro data is submitted with oxygens
+ (both bottle and CTD) in ML/L and with nutrients in UMOL/L.  This program
+ will detect and convert data in /L units and convert them to /KG units.
+ 
+  Usage:   cvuwoce
+ 
+  Program asks for:    input filename   (.HYD or .SEA file)
+                       output filename:
+                       if bottle oxygens:
+                           were oxygens whole bottle or aliquot 
+ 
+  notes:
+          Input format is assumed to be correctly formatted WHP data
+          Data columns identifiers and units strings must be correct
+            and in upper case.  ie.  oxygens are ML/L
+          Oxygen conversion uses sigma T for density. T is set at
+            25 C for aliquot oxygens and when T is missing.  
+
+David Newton 4Mar1999
+        

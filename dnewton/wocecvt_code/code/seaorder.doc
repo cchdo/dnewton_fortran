@@ -1,0 +1,25 @@
+                 Program Seaorder
+      Sorts WOCE .SEA files into ascending pressure order.
+ 
+     This program reads WOCE format .SEA or .HYD files and sorts the
+  station/casts into ascending pressure order. Program looks at CTDPRS only,
+  *not* REVPRS. 
+ 
+     This program should be run before wocecvt if there are pressure inversions
+  or if pressures are listed deepest first.
+ 
+   execution:
+                       seaorder
+ 
+   program asks for:
+                       input filename
+                       output filename
+ 
+ 
+     Uses the same routines as wocecvt for figuring out the headers. So
+  bad headers may choke.
+     Levels with the same pressure should remain in the same order after
+  sorting.
+     Program trims off extra characters (like "^M") from the end of each line.
+
+-David Newton
